@@ -1,31 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>My Books</title>
-    <style>
-        body { font-family: 'Times New Roman', serif; max-width: 500px; margin: 40px auto; }
-        li { padding: 6px 0; cursor: pointer; }
-        .read { text-decoration: line-through; color: gray; }
-    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>MY BOOKS</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>MY TBR</h1>
-    <input id="bookInput" placeholder="Book title">
-    <button onclick="addBook()">Add</button>
-    <ul id="bookList"></ul>
+    <div class="card">
+      <h1>MY TBR</h1>
+      <div class="row">
+        <input id="bookInput" placeholder="Title">
+    </div>
+        <select id="categoryInput" onchange="updateSub()">
+            <option>BOOKS</option>
+            <option>TV SHOWS</option>
+            <option>MOVIES</option>
+            <option>ANIME</option>
+        </select>
+        <select id="subInput"></select>
+    <div class="row">
+        <select id="genreInput">
+            <option>Fiction</option>
+            <option>Non-Fiction</option>
+            <option>Romance</option>
+            <option>Fantasy</option>
+            <option>Historical</option>
+            <option>Mystery</option>
+            <option>Thriller</option>
+            <option>Other</option>
+        </select>
+        <button onclick="addBook()">Add</button>
+      </div>
+      <ul id= "bookList"></ul>
+    </div>
 
     <script>
+        const subcategories = {
+            "BOOKS": ["Novel", "WebNovel", "Fanfiction", "Manhwa", "Other"],
+            "TV SHOWS": ["Indian", "Pakistani", "C-Drama", "K-Drama", "Other"],
+            "MOVIES": ["Bollywood", "Kollywood", "Hollywood", "Korean", "Chinese", "Other"],
+            "ANIME": ["Heartwaming", "Historical", "Short", "Other"]
+        };
+
+        function updateSub() {
+            const category = document.getElementById("categoryInput").value;
+            const subInput = document.getElementById("subInput")
+            subInput.innerHTML = "";
+            subcategories[category].forEach(function (name) {
+                const option = document.createElement("option");
+                option.textContent = name;
+                subInput.appendChild(option);
+            });
+        }
         function addBook() {
             const input = document.getElementById("bookInput");
+            const category = document.getElementById("categoryInput").value;
+            const sub = document.getElementById("subInput").value;
+            const genre = document.getElementById("genreInput").value;
+            if (input.value.trim() === "") return;
+
             const li = document.createElement("li");
-            li.textContent = input.value;
+
+            const title = document.createElement("span");
+            title.textContent = input.value;
+
+            const typeTag = document.createElement("span");
+            typeTag.className = "tag type";
+            typeTag.textContent = category + " . " + sub;
+
+            const genreTag = document.createElement("span");
+            genreTag.className = "tag";
+            genreTag.textContent = genre;
+
+            const tags = document.createElement("span");
+            tags.appendChild(typeTag);
+            tags.appendChild(tags);
+
+            li.appendChild(title);
+            li.appendChild(tag);
             li.onclick = function () { li.classList.toggle("read"); };
-            document.getElementById("bookList").appendChild(li);
+
+            document.getElementById("booklist").appendChild(li);
             input.value = "";
         }
+        updateSub();
     </script>
     </body>
 </html>
