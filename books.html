@@ -3,9 +3,9 @@
 <head>
     <title>My Books</title>
     <style>
-        body { font-family: 'Times New Roman', max-width: 500px; margin: 40px auto; }
+        body { font-family: 'Times New Roman'; max-width: 500px; margin: 40px auto; }
         li { padding: 6px 0; cursor: pointer; }
-        .read { text-decoration: line-through: colr: gray; }
+        .read { text-decoration: line-through: color: gray; }
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,11 +15,11 @@
     <h1>MY TBR</h1>
     <input id="bookInput" placeholder="Book title">
     <button onclick="addBook()">Add</button>
-    <ul id=""booklist"></ul>
+    <ul id="bookList"></ul>
 
     <script>
-        function addbook() {
-            const input = document.getElementByID("bookInput");
+        function addBook() {
+            const input = document.getElementById("bookInput");
             const li = document.createElement("li");
             li.textContent = input.value;
             li.onclick = function () { li.classList.toggle("read"); };
