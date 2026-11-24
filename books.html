@@ -75,13 +75,13 @@
 
             const tags = document.createElement("span");
             tags.appendChild(typeTag);
-            tags.appendChild(tags);
+            tags.appendChild(genreTag);
 
             li.appendChild(title);
-            li.appendChild(tag);
+            li.appendChild(tags);
             li.onclick = function () { li.classList.toggle("read"); };
 
-            document.getElementById("booklist").appendChild(li);
+            document.getElementById("bookList").appendChild(li);
             input.value = "";
         }
         updateSub();
